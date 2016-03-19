@@ -1,5 +1,6 @@
 import ProductList from "../../apps/products/products-list";
 
 export default {
-    "/productslist": ProductList
+    "/productslist": ProductList,
+    "_notFound": "/404"
 };
