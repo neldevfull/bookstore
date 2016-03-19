@@ -1,5 +1,9 @@
 export default class ProductList {
-    constructor() {
+    constructor(html) {
+
+    }
+
+    render() {
 
     }
 }

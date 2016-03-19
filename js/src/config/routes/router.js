@@ -2,11 +2,11 @@ export default class Router {
     constructor(location, routes) {
         this.location = location;
         this.routes = routes;
-
-        console.log("location: "+location+" routes: "+routes);
     }
 
     run() {
-        console.log("Run!");
+        var pageClass = this.routes[this.location.pathname];
+        var page = new pageClass("html");
+        return page;
     }
 }
