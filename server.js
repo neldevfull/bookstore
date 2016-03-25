@@ -1,15 +1,12 @@
-var basePath = __dirname;
-var http = require("http");
-var fs = require("fs");
-var path = require("path");
+var express = require("express");
+var app		= express();
 
-http.createServer(function(req, res) {
-    var stream = fs.createReadStream(path.join(basePath, req.url));
-    stream.on('error', function() {
-        res.writeHead(404);
-        res.end();
-    });
-    stream.pipe(res);
-}).listen(3000, "0.0.0.0");
+app.set("view engine", "ejs");
 
-console.log("Run server...");
+app.get("/products", function(request, response) {
+    response.render("products/list");
+});
+
+app.listen(3000, function() {
+    console.log("Server is running...");
+});

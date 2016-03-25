@@ -1,9 +1,7 @@
-export default class ProductList {
-    constructor(html) {
+import Base from "../../config/modules/base";
 
-    }
-
-    render() {
-
+export default class ProductsList extends Base{
+    run() {
+        console.log("ProductsList", this.html);
     }
 }

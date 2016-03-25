@@ -9,7 +9,7 @@ export default class Router {
         var pageClass = this.routes[this.location.pathname];
 
         if(!pageClass)
-            return (this.routes._notFound || this.defaultNotFoundHandler)(this.location);
+            this.notFound();
 
         var page = new pageClass(this.html);
         page.run();
@@ -18,5 +18,9 @@ export default class Router {
 
     defaultNotFoundHandler(location) {
         throw new Error(`${location.pathname} is not mapped`);
+    }
+
+    notFound() {
+        return (this.routes._notFound || this.defaultNotFoundHandler)(this.location);
     }
 }
