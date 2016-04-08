@@ -1,9 +1,9 @@
-dbConnection = require("../infra/dbConnection");
+connectionFactory = require("../infra/connectionFactory");
 
 module.exports = function(app) {
     app.get("/products", function(request, response) {
         // Connects in PostgreSQL
-        var client = dbConnection.pgConnection();
+        var client = connectionFactory.pgConnection();
 
         client.connect(function(err) {
             if(err) {
