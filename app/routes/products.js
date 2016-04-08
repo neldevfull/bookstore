@@ -1,10 +1,9 @@
+dbConnection = require("../infra/dbConnection");
+
 module.exports = function(app) {
     app.get("/products", function(request, response) {
         // Connects in PostgreSQL
-        var pg = require('pg');
-        var conString = "postgres://postgres:123456@192.168.33.10/supermarket_control_db";
-
-        var client = new pg.Client(conString);
+        var client = dbConnection.pgConnection();
 
         client.connect(function(err) {
             if(err) {
