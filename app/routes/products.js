@@ -1,19 +1,16 @@
 module.exports = function(app) {
     app.get("/products", function(request, response) {
         // Connects in PostgreSQL
-        var client = app.infra.connectionFactory.pgConnection();
+        var connect    = app.infra.connectionFactory;
+        var client     = connect.openConnection();
+        var productsDB = app.infra.productsDB;
 
-        client.connect(function(err) {
+        productsDB.listAll(client, function(err, results) {
             if(err) {
-                return console.error("could not connect to postgres", err);
+                return console.error("error running query", err);
             }
-            client.query("SELECT * FROM products", function(err, results) {
-                if(err) {
-                    return console.error("error running query", err);
-                }
-                response.render("products/list", { list: results.rows });
-                client.end();
-            });
+            response.render("products/list", { list: results.rows });
+            connect.closeConnection(client);
         });
     });
 }
