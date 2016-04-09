@@ -18,7 +18,7 @@ module.exports = function(app) {
         response.render("products/form");
     });
 
-    app.post("/products/save", function(request, response) {
+    app.post("/products", function(request, response) {
         // Connects in PostgreSQL
         var connect     = app.infra.connectionFactory;
         var connection  = connect.openConnection();
