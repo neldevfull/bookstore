@@ -9,7 +9,16 @@ module.exports = function(app) {
             if(err) {
                 return console.error("error running query", err);
             }
-            response.render("products/list", { list: results.rows });
+
+            response.format({
+                html: function() {
+                    response.render("products/list", { list: results.rows });
+                },
+                json: function() {
+                    response.json(results);
+                }
+            });
+
             connect.closeConnection(connection);
         });
     });
