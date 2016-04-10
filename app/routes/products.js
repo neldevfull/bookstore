@@ -27,7 +27,7 @@ module.exports = function(app) {
     });
 
     app.get("/products/new", function(request, response) {
-        response.render("products/form");
+        response.render("products/form", {errors: {}, product: {}});
     });
 
     app.post("/products", function(request, response) {
@@ -36,9 +36,28 @@ module.exports = function(app) {
         var connection  = connect.openConnection();
         var productsDAO =  new app.infra.ProductsDAO(connection);
         // Get date forms
-        var products = request.body;
+        var product = request.body;
 
-        productsDAO.save(products, function(err, results) {
+        request.assert("title", "Title is required").notEmpty();
+        request.assert("price", "Format invalid").isFloat();
+
+        var errors = request.validationErrors();
+
+        if(errors) {
+            response.format({
+                html: function() {
+                    response.status(400)
+                        .render("products/form", {errors: errors, product: product});
+                },
+                json: function() {
+                    response.status(400)
+                        .json({errors: errors, product: product});
+                }
+            });
+            return;
+        }
+
+        productsDAO.save(product, function(err, results) {
             if(err) {
                 return console.error("error running query", err);
             }

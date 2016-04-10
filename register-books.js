@@ -20,7 +20,7 @@ var client = http.request(config, function(response) {
 });
 
 var product = {
-    title: "Node.js",
+    title: "", // Test error of validation
     description: "Node.js and JavaScript!",
     price: 100
 };
