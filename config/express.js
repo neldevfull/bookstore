@@ -11,6 +11,7 @@ module.exports = function() {
 
     // Middlewares
     app.use(bodyParser.urlencoded({extended: true}));
+    app.use(bodyParser.json());
 
     // Load routes and infra
     load("routes", {cwd: "app"})
