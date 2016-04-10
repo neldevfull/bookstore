@@ -1,4 +1,5 @@
-var http = require("http");
+var http   = require("http");
+var assert = require("assert");
 
 describe("#products", function() {
     it("##listing json", function(done) {
@@ -12,12 +13,9 @@ describe("#products", function() {
         };
 
         http.get(config, function(response) {
-            response.statusCode == 200 ? console.log("Status OK") :
-                console.log("Status not ok...")
-
-            response.headers["content-type"] == "application/json; charset=utf-8" ?
-                console.log("Content-type OK") : console.log("Content-type not ok...")
-
+            assert.equal(response.statusCode, 200);
+            assert.equal(response.headers["content-type"],
+                "application/json; charset=utf-8");
             done();
         });
     });
