@@ -6,16 +6,19 @@ module.exports = function(app) {
         var productsDAO =  new app.infra.ProductsDAO(connection);
 
         productsDAO.listAll(function(err, results) {
+            var list = null;
+
             if(err) {
                 return console.error("error running query", err);
             }
 
+            list = results.rows;
             response.format({
                 html: function() {
-                    response.render("products/list", { list: results.rows });
+                    response.render("products/list", { list: list });
                 },
                 json: function() {
-                    response.json(results);
+                    response.json(list);
                 }
             });
 
