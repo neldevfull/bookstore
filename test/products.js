@@ -2,6 +2,14 @@ var express   = require("../config/express")();
 var supertest = require("supertest")(express);
 
 describe("#products", function() {
+    beforeEach(function(done) {
+        var connect     = express.infra.connectionFactory;
+        var connection  = connect.openConnection();
+        connection.query("DELETE FROM products", function(error, result){
+            if(!error) done();
+        });
+    });
+
     it("##listing json", function(done) {
         supertest.get("/products")
             .set("Accept", "application/json")
