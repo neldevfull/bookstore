@@ -2,8 +2,8 @@ module.exports = {
     openConnection: function() {
         // Connects in PostgreSQL
         var pg        = require('pg');
-        var database  = process.env.NODE_ENV === "development" ?
-            "supermarket_control_db" : "supermarket_control_db_test";
+        var database  = process.env.NODE_ENV === "test" ?
+            "supermarket_control_db_test" : "supermarket_control_db";
 
         var conString = "postgres://postgres:123456@192.168.33.10/"+database;
         var client    = new pg.Client(conString);
