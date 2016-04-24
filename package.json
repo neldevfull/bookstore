@@ -23,7 +23,8 @@
     "express": "^4.13.4",
     "express-load": "^1.1.15",
     "express-validator": "^2.20.3",
-    "pg": "^4.5.2"
+    "pg": "^4.5.2",
+    "socket.io": "^1.4.5"
   },
   "devDependencies": {
     "mocha": "^2.4.5",

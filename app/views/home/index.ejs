@@ -248,5 +248,12 @@
         </div>
     </div>
 </footer>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+    socket.on("newPromotion", function(data) {
+        alert("Produto em promoção: "+data.product.title);
+    });
+</script>
 </body>
 </html>
