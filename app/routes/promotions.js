@@ -28,6 +28,7 @@ module.exports = function(app) {
 
     app.post("/promotions", function(request, response) {
         var promotions = request.body;
+        app.get("io").emit("newPromotion", promotions);
         response.redirect("/promotions/form");
     });
 }
